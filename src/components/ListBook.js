@@ -1,14 +1,8 @@
 import React from 'react'
 
-class ListRead extends React.Component {
+class ListBook extends React.Component {
 
-    render() {
-
-        let read = this.props.books.filter(el => {
-          if (el.shelf === "read") {
-            return el;
-          }
-        });
+    render() { 
     
         return (
           <div className="list-books-content">
@@ -17,7 +11,7 @@ class ListRead extends React.Component {
                 <h2 className="bookshelf-title">Currently Reading</h2>
                 <div className="bookshelf-books">
                   <ol className="books-grid">
-                    {read.map((myBook) => (
+                    {this.props.books.map((myBook) => (
                       <li key={myBook.id}>
                         <div className="book">
                           <div className="book-top">
@@ -48,4 +42,4 @@ class ListRead extends React.Component {
     
 }
 
-export default ListRead
+export default ListBook
