@@ -1,13 +1,29 @@
 import React from 'react'
+import * as BooksAPI from '../BooksAPI';
 
 class ListCurrentlyReading extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            book: null
+        }
+    }
+
+    updateBook = (book, shelf) => {
+        BooksAPI.update(book, shelf)
+            .then(resp => {
+                book.shelf = shelf;
+                this.setState({ book });
+            });
+    }
+
     render() {
 
         let currentlyReading = this.props.books.filter(el => {
             if (el.shelf === "currentlyReading") {
                 return el;
             }
-        });
+        })
 
         return (
             <div className="list-books-content">
@@ -18,11 +34,12 @@ class ListCurrentlyReading extends React.Component {
                             <ol className="books-grid">
                                 {currentlyReading.map((myBook) => (
                                     <li key={myBook.id}>
+                                        {console.log(myBook.shelf)}
                                         <div className="book">
                                             <div className="book-top">
                                                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${myBook.imageLinks && myBook.imageLinks.thumbnail || ""}")` }}></div>
                                                 <div className="book-shelf-changer">
-                                                    <select>
+                                                    <select value={myBook.shelf || 'none'} onChange={(e) => { this.updateBook(myBook, e.target.value) }}>
                                                         <option value="move" disabled>Move to...</option>
                                                         <option value="currentlyReading">Currently Reading</option>
                                                         <option value="wantToRead">Want to Read</option>

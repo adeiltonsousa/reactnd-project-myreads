@@ -15,15 +15,19 @@ class BooksApp extends Component {
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then((books) => this.setState({ books: books }));
+    BooksAPI.getAll()
+    .then((books) => 
+    this.setState({ books: books }));
   }
-  
+
+ 
   render() {
     return (
       <div className="app">
         <Route exact path='/' render={() => (
           <div>
             {console.table(this.state.books)}
+
             <ListCurrentlyReading books={this.state.books} />
             <ListWaltToRead       books={this.state.books} />
             <ListRead             books={this.state.books} />

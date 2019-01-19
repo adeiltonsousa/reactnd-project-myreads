@@ -3,8 +3,14 @@ import '../App.css'
 import { Link } from 'react-router-dom'
 
 
-const SearchBooks = props => {
-    return <div>
+
+
+class SearchBooks extends React.Component {
+
+    render() {
+
+        return (
+            <div>
                 <div className="search-books">
                     <div className="search-books-bar">
                         <Link className="close-search" to="/">Close</Link>
@@ -16,7 +22,12 @@ const SearchBooks = props => {
                             However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                             you don't find a specific author or title. Every search is limited by search terms.
                             */}
-                            <input type="text" placeholder="Search by title or author"/>
+                            <input
+                                type="text"
+                                placeholder="Search by title or author"
+                                value={this.state.query}
+                                onChange={(event) => this.submitSearch(event.target.value)}
+                            />
 
                         </div>
                     </div>
@@ -25,6 +36,9 @@ const SearchBooks = props => {
                     </div>
                 </div>
             </div>
+        );
+    }
 }
 
 export default SearchBooks
+
