@@ -14,52 +14,60 @@ class BooksApp extends Component {
 
   updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf)
-        .then(resp => {
-            book.shelf = shelf;
-            this.setState({ book });
-        });
+      .then(resp => {
+        book.shelf = shelf;
+        this.setState({ book });
+      });
   }
 
   componentDidMount() {
     BooksAPI.getAll()
-    .then((books) => 
-    this.setState({ books: books }));
+      .then((books) =>
+        this.setState({ books: books }));
   }
-
+      
 
   render() {
 
     var shelfBookCurently = this.state.books.filter(el => {
       if (el.shelf === "currentlyReading") {
-          return el
+        return el
       }
     })
 
     var shelfBookWaltToRead = this.state.books.filter(el => {
       if (el.shelf === "wantToRead") {
-          return el
+        return el
       }
     })
 
     var shelfBookRead = this.state.books.filter(el => {
       if (el.shelf === "read") {
-          return el;
-      } 
-    })   
+        return el;
+      }
+    })
 
 
     return (
       <div className="app">
-        <Route exact path='/' render={() => (
-          <div>
-            <ListBook title={"Currently Reading"} books={shelfBookCurently} updateBook={this.updateBook} />
-            <ListBook title={"Want To Read"} books={shelfBookWaltToRead} updateBook={this.updateBook} />
-            <ListBook title={"Read"} books={shelfBookRead} updateBook={this.updateBook} />
-
-            <AddBook />
+        <div className="list-books">
+          <div className="list-books-title">
+            <h1>MyReads</h1>
           </div>
-        )} />
-        <Route path='/search' render={SearchBooks} />
+          <Route exact path='/' render={() => (
+            <div>
+              <ListBook title={"Currently Reading"} books={shelfBookCurently} updateBook={this.updateBook} />
+              <ListBook title={"Want To Read"} books={shelfBookWaltToRead} updateBook={this.updateBook} />
+              <ListBook title={"Read"} books={shelfBookRead} updateBook={this.updateBook} />
+
+              <AddBook />
+            </div>
+          )} />
+          <Route
+            component={ SearchBooks }
+            path='/search'
+            />
+        </div>
       </div>
     )
   }

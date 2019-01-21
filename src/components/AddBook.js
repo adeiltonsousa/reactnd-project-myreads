@@ -2,14 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
-class ContainerMyReads extends React.Component {
+class AddBook extends React.Component {
     render() {
         return (
             <div className="open-search">
-              <Link to="/search">Add a book</Link>
+                <button>
+                    <Link                     
+                        to='/search'
+                        >
+                    AddBook</Link>
+                </button>
             </div>
         );
       }
     }
 
-export default ContainerMyReads;
+export default AddBook;
