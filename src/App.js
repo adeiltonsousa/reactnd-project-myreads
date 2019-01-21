@@ -2,16 +2,22 @@ import React, { Component } from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import SearchBooks from './components/SearchBooks'
-import AddBook from './components/AddBook';
+import AddBook from './components/AddBook'
 import { Route } from 'react-router-dom'
-import ListCurrentlyReading from './components/ListCurrentlyReading';
-import ListWaltToRead from './components/ListWantToRead';
-import ListRead from './components/ListRead';
+import ListBook from './components/ListBook'
+
 
 class BooksApp extends Component {
   state = {
     books: [],
-    read: []
+  }
+
+  updateBook = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+        .then(resp => {
+            book.shelf = shelf;
+            this.setState({ book });
+        });
   }
 
   componentDidMount() {
@@ -20,18 +26,36 @@ class BooksApp extends Component {
     this.setState({ books: books }));
   }
 
-    
- 
+
   render() {
+
+    var shelfBookCurently = this.state.books.filter(el => {
+      if (el.shelf === "currentlyReading") {
+          return el
+      }
+    })
+
+    var shelfBookWaltToRead = this.state.books.filter(el => {
+      if (el.shelf === "wantToRead") {
+          return el
+      }
+    })
+
+    var shelfBookRead = this.state.books.filter(el => {
+      if (el.shelf === "read") {
+          return el;
+      } 
+    })   
+
+
     return (
       <div className="app">
         <Route exact path='/' render={() => (
           <div>
-            {console.table(this.state.books)}
+            <ListBook title={"Currently Reading"} books={shelfBookCurently} updateBook={this.updateBook} />
+            <ListBook title={"Want To Read"} books={shelfBookWaltToRead} updateBook={this.updateBook} />
+            <ListBook title={"Read"} books={shelfBookRead} updateBook={this.updateBook} />
 
-            <ListCurrentlyReading books={this.state.books} />
-            <ListWaltToRead       books={this.state.books} />
-            <ListRead             books={this.state.books} />
             <AddBook />
           </div>
         )} />
