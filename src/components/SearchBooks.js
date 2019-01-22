@@ -5,22 +5,26 @@ import * as BooksAPI from '../BooksAPI'
 
 class SearchBooks extends React.Component {
     state = {
-        query:'',
-        searchQuery:'',
-        resultado: '',
+        query: '',
     }
 
-    //queryBook = BooksAPI.search("Art");
+    clearQuery = () => {
+        this.searchQuery('')
+    }
 
     searchQuery = (query) => {
-        BooksAPI.search(query)
-            this.setState({ query: query.trim()})               
+        this.setState({
+            query: query.trim()
+        })
     }
+
 
     render() {
         const { query } = this.state
 
-        console.log(this.state.query)
+        var resultQuery = BooksAPI.search(query)
+
+        console.table(resultQuery)
 
         return (
             <div>
@@ -39,22 +43,15 @@ class SearchBooks extends React.Component {
                                 type="text"
                                 placeholder="Search by title or author"
                                 value={query}
-                                onChange={(event) => this.searchQuery(event.target.value)}                           
+                                onChange={(event) => this.searchQuery(event.target.value)}
                             />
                         </div>
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
+                            <div>
 
-                        {/* {this.showingBooks.map((contact) => (
-                                <li key={contact.id} className='contact-list-item'>
-                                <div className='contact-details'>
-                                    <p>{contact.name}</p>
-                                    <p>{contact.title}</p>
-                                </div>
-                                
-                                </li>
-                            ))} */}
+                            </div>
                         </ol>
                     </div>
                 </div>
@@ -65,3 +62,20 @@ class SearchBooks extends React.Component {
 
 export default SearchBooks
 
+/*
+searchQuery = (query) => {
+        this.setState({
+            query: query.trim()
+        })
+    }
+
+        var result = '';
+
+        if (query === "") {
+            result = "No Results"
+        } else {
+
+        }
+        return result;
+    }
+*/
