@@ -5,7 +5,7 @@ import * as BooksAPI from '../BooksAPI'
 
 class SearchBooks extends React.Component {
     state = {
-        query: '',
+        query:'',
     }
 
     clearQuery = () => {
@@ -13,18 +13,17 @@ class SearchBooks extends React.Component {
     }
 
     searchQuery = (query) => {
-        this.setState({
-            query: query.trim()
-        })
+            this.setState({
+                query: query.trim()
+            })
     }
-
 
     render() {
         const { query } = this.state
 
-        var resultQuery = BooksAPI.search(query)
+        const resultQuery = BooksAPI.search(query)
 
-        console.table(resultQuery)
+        console.log(resultQuery)
 
         return (
             <div>
@@ -50,7 +49,7 @@ class SearchBooks extends React.Component {
                     <div className="search-books-results">
                         <ol className="books-grid">
                             <div>
-
+                            {/* { (resultQuery) } */}
                             </div>
                         </ol>
                     </div>
