@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 class ListBook extends React.Component {
 
   render() {
@@ -11,7 +12,6 @@ class ListBook extends React.Component {
             <h2 className="bookshelf-title">{this.props.title}</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {console.table(this.props.books)}
                 {this.props.books.map((myBook) => (
                   <li key={myBook.id}>
                     <div className="book">

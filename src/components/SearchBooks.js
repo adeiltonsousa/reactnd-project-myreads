@@ -3,9 +3,11 @@ import '../App.css'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
 
+
 class SearchBooks extends React.Component {
     state = {
         query: '',
+        result: '',
     }
 
     clearQuery = () => {
@@ -22,9 +24,19 @@ class SearchBooks extends React.Component {
     render() {
         const { query } = this.state
 
-        var resultQuery = BooksAPI.search(query)
-
-        console.table(resultQuery)
+        /*
+        BooksAPI.search(query)
+            .then(function (results) {
+                console.log(results)
+            })
+        */
+       BooksAPI.search(query)
+            .then(function (result) {
+                console.log(result)
+            }, function (err) {
+                console.log(err)
+            })
+        
 
         return (
             <div>
@@ -32,13 +44,6 @@ class SearchBooks extends React.Component {
                     <div className="search-books-bar">
                         <Link className="close-search" to="/">Close</Link>
                         <div className="search-books-input-wrapper">
-                            {/*
-                            NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                            You can find these search terms here:
-                            https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-                            However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                            you don't find a specific author or title. Every search is limited by search terms.
-                            */}
                             <input
                                 type="text"
                                 placeholder="Search by title or author"
@@ -46,11 +51,21 @@ class SearchBooks extends React.Component {
                                 onChange={(event) => this.searchQuery(event.target.value)}
                             />
                         </div>
+
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                            <div>
-
+                            <div className="list-books-content">
+                                <div>
+                                    <div className="bookshelf">
+                                        <h2 className="bookshelf-title">{this.props.title}</h2>
+                                        <div className="bookshelf-books">
+                                            <ol className="books-grid">
+                                                { this.state.result }
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </ol>
                     </div>
@@ -61,21 +76,3 @@ class SearchBooks extends React.Component {
 }
 
 export default SearchBooks
-
-/*
-searchQuery = (query) => {
-        this.setState({
-            query: query.trim()
-        })
-    }
-
-        var result = '';
-
-        if (query === "") {
-            result = "No Results"
-        } else {
-
-        }
-        return result;
-    }
-*/
