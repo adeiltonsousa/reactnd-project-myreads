@@ -63,9 +63,13 @@ class BooksApp extends Component {
               <AddBook />
             </div>
           )} />
+          
+          
+          
           <Route
             component={ SearchBooks }
             path='/search'
+            updateBook={this.updateBook} 
             />
         </div>
       </div>

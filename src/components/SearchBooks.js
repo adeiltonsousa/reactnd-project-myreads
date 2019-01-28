@@ -2,52 +2,64 @@ import React from 'react'
 import '../App.css'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
+import ListBook from './ListBook';
 
 
 class SearchBooks extends React.Component {
-    state = {
-        query: '',
-        result: '',
+    constructor() {
+        super();
+        this.state = {
+            query: '',
+            books: []
+        };
     }
 
-    clearQuery = () => {
-        this.searchQuery('')
-    }
+    /**
+     * Update the query to hit the api with, search the api with that query and set the state of the page
+     * @param {string} query string request to hit api with
+     */
 
     searchQuery = (query) => {
         this.setState({
             query: query.trim()
         })
-    }
 
+        BooksAPI.search(query).then((response) => {
+            if (response && response.length) {
+                const books = response.map((book) => {
+                    const shelf = book ? book.shelf : 'none';
+                    return {
+                        id: book.id,
+                        shelf: shelf,
+                        authors: book.authors,
+                        title: book.title,
+                        imageLinks: {
+                            thumbnail: book.imageLinks.thumbnail
+                        }
+                    };
+                });
+                this.setState({ books });
+            }
+        });
+    };
 
     render() {
-        const { query } = this.state
+        const { books } = this.state;
 
-        /*
-        BooksAPI.search(query)
-            .then(function (results) {
-                console.log(results)
-            })
-        */
-       BooksAPI.search(query)
-            .then(function (result) {
-                console.log(result)
-            }, function (err) {
-                console.log(err)
-            })
-        
 
         return (
             <div>
                 <div className="search-books">
                     <div className="search-books-bar">
-                        <Link className="close-search" to="/">Close</Link>
+                        <Link
+                            className="close-search"
+                            to="/"
+                        >Close
+                        </Link>
                         <div className="search-books-input-wrapper">
                             <input
                                 type="text"
                                 placeholder="Search by title or author"
-                                value={query}
                                 onChange={(event) => this.searchQuery(event.target.value)}
                             />
                         </div>
@@ -55,18 +67,9 @@ class SearchBooks extends React.Component {
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                            <div className="list-books-content">
-                                <div>
-                                    <div className="bookshelf">
-                                        <h2 className="bookshelf-title">{this.props.title}</h2>
-                                        <div className="bookshelf-books">
-                                            <ol className="books-grid">
-                                                { this.state.result }
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                            <ListBook title={"Search Results"} books={books} updateBook={this.props.updateBook} />
+
                         </ol>
                     </div>
                 </div>

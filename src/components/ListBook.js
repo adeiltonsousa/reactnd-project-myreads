@@ -2,6 +2,7 @@ import React from 'react'
 
 
 class ListBook extends React.Component {
+  
 
   render() {
 
@@ -18,7 +19,7 @@ class ListBook extends React.Component {
                       <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${myBook.imageLinks && myBook.imageLinks.thumbnail || ""}")` }}></div>
                         <div className="book-shelf-changer">
-                          <select value={myBook.shelf || 'none'} onChange={(e) => { this.props.updateBook(myBook, e.target.value) }}>
+                          <select value={myBook.shelf} onChange={(e) => { this.props.updateBook(myBook, e.target.value) }}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
