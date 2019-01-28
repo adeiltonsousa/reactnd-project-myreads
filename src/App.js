@@ -10,6 +10,7 @@ import ListBook from './components/ListBook'
 class BooksApp extends Component {
   state = {
     books: [],
+    book:{},
   }
 
   updateBook = (book, shelf) => {
@@ -24,8 +25,8 @@ class BooksApp extends Component {
     BooksAPI.getAll()
       .then((books) =>
         this.setState({ books: books }));
-  }
-      
+};
+  
 
   render() {
 
@@ -66,11 +67,10 @@ class BooksApp extends Component {
           
           
           
-          <Route
-            component={ SearchBooks }
+        <Route
+            render={() => <SearchBooks updateBook={this.updateBook} />}
             path='/search'
-            updateBook={this.updateBook} 
-            />
+        />
         </div>
       </div>
     )

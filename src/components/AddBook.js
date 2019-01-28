@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 
 class AddBook extends React.Component {
     render() {
-        return (
-            <div className="open-search">
+        return (           
                 <button>
-                    <Link                     
+                    <div >
+                    <Link
+                        className="open-search"                     
                         to='/search'
                         >
                     AddBook</Link>
+                    </div>
                 </button>
-            </div>
         );
       }
     }
