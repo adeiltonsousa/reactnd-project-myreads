@@ -19,7 +19,7 @@ class SearchBooks extends React.Component {
      * @param {string} query string request to hit api with
      */
 
-    searchQuery = (query) => {
+    searchQuery = (query,) => {
         this.setState({
             query: query.trim()
         })
@@ -45,7 +45,6 @@ class SearchBooks extends React.Component {
 
     render() {
         const { books } = this.state;
-
 
         return (
             <div>

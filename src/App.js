@@ -10,25 +10,44 @@ import ListBook from './components/ListBook'
 class BooksApp extends Component {
   state = {
     books: [],
-    book:{},
+    book: [],
   }
 
   updateBook = (book, shelf) => {
+    book.shelf = shelf;
+
+    let updatedBooks = this.state.books.filter(el => el.id !== book.id);
+        updatedBooks = [...updatedBooks, book];
+        this.setState({ books : updatedBooks })
+
     BooksAPI.update(book, shelf)
       .then(resp => {
         book.shelf = shelf;
-        this.setState({ book });
-      });
-  }
+        this.setState( { book } );
+  });
+}
+  
 
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) =>
         this.setState({ books: books }));
-};
+  };
+
   
 
   render() {
+
+    // book.map((naEstante) => {
+    //   const matchBook = books.find(
+    //     bookWithShelf => bookWithShelf.id === naEstante.id
+    //   )
+    //   naEstante.shelf = 'none'
+
+    //   return matchBook ? matchBook : naEstante
+
+    // });
+
 
     var shelfBookCurently = this.state.books.filter(el => {
       if (el.shelf === "currentlyReading") {
