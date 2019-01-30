@@ -38,17 +38,6 @@ class BooksApp extends Component {
 
   render() {
 
-    // book.map((naEstante) => {
-    //   const matchBook = books.find(
-    //     bookWithShelf => bookWithShelf.id === naEstante.id
-    //   )
-    //   naEstante.shelf = 'none'
-
-    //   return matchBook ? matchBook : naEstante
-
-    // });
-
-
     var shelfBookCurently = this.state.books.filter(el => {
       if (el.shelf === "currentlyReading") {
         return el

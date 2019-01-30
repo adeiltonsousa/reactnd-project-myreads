@@ -2,7 +2,8 @@ import React from 'react'
 import '../App.css'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
-import ListBook from './ListBook';
+import ListBook from './ListBook'
+import noimage from '../icons/noimage.jpg'
 
 
 class SearchBooks extends React.Component {
@@ -14,21 +15,30 @@ class SearchBooks extends React.Component {
         };
     }
 
+    updateQuery = (query) => {
+        this.setState({query : query}, this.searchQuery);
+    }
+
     /**
      * Update the query to hit the api with, search the api with that query and set the state of the page
      * @param {string} query string request to hit api with
      */
 
-    searchQuery = (query,) => {
-        this.setState({
-            query: query.trim()
-        })
-
-        BooksAPI.search(query).then((response) => {
-            if (response && response.length) {
+    searchQuery = () => {
+             
+        BooksAPI.search(this.state.query).then((response) => {
+            if (this.state.query === '' || this.state.query === undefined) {
+                return this.setState({ books: [] });
+            }
+            if (response.error){
+                return this.setState({ books: [] });
+            }
+            if (response && response.length)  {
                 const books = response.map((book) => {
-                    const shelf = book ? book.shelf : 'none';
-                    return {
+                    if (book.shelf === undefined) {
+                        var shelf = book.shelf = 'none';
+                    }                    
+                    return {                        
                         id: book.id,
                         shelf: shelf,
                         authors: book.authors,
@@ -37,6 +47,7 @@ class SearchBooks extends React.Component {
                             thumbnail: book.imageLinks.thumbnail
                         }
                     };
+
                 });
                 this.setState({ books });
             }
@@ -45,6 +56,7 @@ class SearchBooks extends React.Component {
 
     render() {
         const { books } = this.state;
+        const { query } = this.state
 
         return (
             <div>
@@ -59,7 +71,8 @@ class SearchBooks extends React.Component {
                             <input
                                 type="text"
                                 placeholder="Search by title or author"
-                                onChange={(event) => this.searchQuery(event.target.value)}
+                                value={query}
+                                onChange={(event) => this.updateQuery(event.target.value)}
                             />
                         </div>
 
@@ -67,7 +80,7 @@ class SearchBooks extends React.Component {
                     <div className="search-books-results">
                         <ol className="books-grid">
 
-                            <ListBook title={"Search Results"} books={books} updateBook={this.props.updateBook} />
+                            <ListBook title="Search Results" books={books} updateBook={this.props.updateBook} />
 
                         </ol>
                     </div>
