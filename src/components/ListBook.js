@@ -1,5 +1,4 @@
 import React from 'react'
-import noimage from '../icons/noimage.jpg'
 
 
 class ListBook extends React.Component {

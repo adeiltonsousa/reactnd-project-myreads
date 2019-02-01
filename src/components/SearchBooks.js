@@ -3,8 +3,6 @@ import '../App.css'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
 import ListBook from './ListBook'
-import noimage from '../icons/noimage.jpg'
-
 
 class SearchBooks extends React.Component {
     constructor() {
@@ -16,29 +14,31 @@ class SearchBooks extends React.Component {
     }
 
     updateQuery = (query) => {
-        this.setState({query : query}, this.searchQuery);
+        this.setState({ query: query }, this.searchQuery);
     }
 
     /**
-     * Update the query to hit the api with, search the api with that query and set the state of the page
      * @param {string} query string request to hit api with
      */
 
     searchQuery = () => {
-             
+
         BooksAPI.search(this.state.query).then((response) => {
             if (this.state.query === '' || this.state.query === undefined) {
                 return this.setState({ books: [] });
             }
-            if (response.error){
+            if (response.error) {
                 return this.setState({ books: [] });
             }
-            if (response && response.length)  {
+            if (response && response.length) {
                 const books = response.map((book) => {
                     if (book.shelf === undefined) {
                         var shelf = book.shelf = 'none';
-                    }                    
-                    return {                        
+                    }
+                    if (book.imageLinks === undefined) {
+                        book.imageLinks = '';
+                    }
+                    return {
                         id: book.id,
                         shelf: shelf,
                         authors: book.authors,
@@ -68,6 +68,7 @@ class SearchBooks extends React.Component {
                         >Close
                         </Link>
                         <div className="search-books-input-wrapper">
+
                             <input
                                 type="text"
                                 placeholder="Search by title or author"

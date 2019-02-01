@@ -39,22 +39,22 @@ class BooksApp extends Component {
   render() {
 
     var shelfBookCurently = this.state.books.filter(el => {
-      if (el.shelf === "currentlyReading") {
-        return el
-      }
-    })
+        if (el.shelf === "currentlyReading") {
+          return el
+        }
+     })
 
-    var shelfBookWaltToRead = this.state.books.filter(el => {
-      if (el.shelf === "wantToRead") {
-        return el
-      }
-    })
+     var shelfBookWaltToRead = this.state.books.filter(el => {
+       if (el.shelf === "wantToRead") {
+         return el
+       }
+     })
 
-    var shelfBookRead = this.state.books.filter(el => {
-      if (el.shelf === "read") {
-        return el;
-      }
-    })
+     var shelfBookRead = this.state.books.filter(el => {
+       if (el.shelf === "read") {
+         return el
+       }
+     })
 
 
     return (
@@ -65,9 +65,9 @@ class BooksApp extends Component {
           </div>
           <Route exact path='/' render={() => (
             <div>
-              <ListBook title={"Currently Reading"} books={shelfBookCurently} updateBook={this.updateBook} />
-              <ListBook title={"Want To Read"} books={shelfBookWaltToRead} updateBook={this.updateBook} />
-              <ListBook title={"Read"} books={shelfBookRead} updateBook={this.updateBook} />
+              <ListBook title="Currently Reading" books={shelfBookCurently} updateBook={this.updateBook} />
+              <ListBook title="Want To Read" books={shelfBookWaltToRead} updateBook={this.updateBook} />
+              <ListBook title="Read" books={shelfBookRead} updateBook={this.updateBook} />
 
               <AddBook />
             </div>
