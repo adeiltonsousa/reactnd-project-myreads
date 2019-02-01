@@ -68,7 +68,6 @@ class SearchBooks extends React.Component {
                         >Close
                         </Link>
                         <div className="search-books-input-wrapper">
-
                             <input
                                 type="text"
                                 placeholder="Search by title or author"
@@ -76,7 +75,6 @@ class SearchBooks extends React.Component {
                                 onChange={(event) => this.updateQuery(event.target.value)}
                             />
                         </div>
-
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">

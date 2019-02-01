@@ -17,16 +17,16 @@ class BooksApp extends Component {
     book.shelf = shelf;
 
     let updatedBooks = this.state.books.filter(el => el.id !== book.id);
-        updatedBooks = [...updatedBooks, book];
-        this.setState({ books : updatedBooks })
+    updatedBooks = [...updatedBooks, book];
+    this.setState({ books: updatedBooks })
 
     BooksAPI.update(book, shelf)
       .then(resp => {
         book.shelf = shelf;
-        this.setState( { book } );
-  });
-}
-  
+        this.setState({ book });
+      });
+  }
+
 
   componentDidMount() {
     BooksAPI.getAll()
@@ -34,27 +34,27 @@ class BooksApp extends Component {
         this.setState({ books: books }));
   };
 
-  
+
 
   render() {
 
     var shelfBookCurently = this.state.books.filter(el => {
-        if (el.shelf === "currentlyReading") {
-          return el
-        }
-     })
+      if (el.shelf === "currentlyReading") {
+        return el
+      }
+    })
 
-     var shelfBookWaltToRead = this.state.books.filter(el => {
-       if (el.shelf === "wantToRead") {
-         return el
-       }
-     })
+    var shelfBookWaltToRead = this.state.books.filter(el => {
+      if (el.shelf === "wantToRead") {
+        return el
+      }
+    })
 
-     var shelfBookRead = this.state.books.filter(el => {
-       if (el.shelf === "read") {
-         return el
-       }
-     })
+    var shelfBookRead = this.state.books.filter(el => {
+      if (el.shelf === "read") {
+        return el
+      }
+    })
 
 
     return (
@@ -72,13 +72,13 @@ class BooksApp extends Component {
               <AddBook />
             </div>
           )} />
-          
-          
-          
-        <Route
+
+
+
+          <Route
             render={() => <SearchBooks updateBook={this.updateBook} />}
             path='/search'
-        />
+          />
         </div>
       </div>
     )
