@@ -7,14 +7,14 @@ body {
 }
 
 body, .app {
-  background: white;
+  background:#dadbdf;
 }
 
 /* main page */
 
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
+  background: black;
   text-align: center;
 }
 
@@ -131,6 +131,8 @@ button:active {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  background-color: #f4f4f5;
+  border: #fff solid .8px;
 }
 
 .books-grid li {
@@ -195,4 +197,8 @@ button:active {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+h2 {
+  color: rgb(88, 88, 88);
 }
