@@ -26,7 +26,5 @@ Acesse: http://localhost:3000/
 
 Screen 1 | Screen 2 | Screen 3
 ---------| -------- | --------
-![Alt Text](https://github.com/adeiltonsousa/reactnd-project-myreads/blob/master/src/icons/01.png) |
-![Alt Text](https://github.com/adeiltonsousa/reactnd-project-myreads/blob/master/src/icons/02.png) |
-![Alt Text](https://github.com/adeiltonsousa/reactnd-project-myreads/blob/master/src/icons/03.png)
+![Alt Text](https://github.com/adeiltonsousa/reactnd-project-myreads/blob/master/src/icons/01.png) | ![Alt Text](https://github.com/adeiltonsousa/reactnd-project-myreads/blob/master/src/icons/02.png) | ![Alt Text](https://github.com/adeiltonsousa/reactnd-project-myreads/blob/master/src/icons/03.png)
 
