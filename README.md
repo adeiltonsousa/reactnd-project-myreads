@@ -2,11 +2,11 @@
 
 Nesta aplicação, a página principal exibe uma lista de "estantes" (ou seja, categorias), cada uma das quais contém uma série de livros. As três estantes são:
 
-#### Currently Reading (lendo atualmente)
+Currently Reading (lendo atualmente)
 
-#### Want to Read (quer ler)
+Want to Read (quer ler)
 
-#### Read (já leu)
+Read (já leu)
 
 
 
@@ -26,7 +26,6 @@ npm start
 
 Acessar: http://localhost:3000/
 ```
-Acesse: http://localhost:3000/
 
 ### Screenshots
 
