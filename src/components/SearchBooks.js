@@ -31,13 +31,27 @@ class SearchBooks extends React.Component {
                 return this.setState({ books: [] });
             }
             if (response && response.length) {
-                const books = response.map((book) => {
+                const books = response.map((book) => {                    
                     if (book.shelf === undefined) {
                         var shelf = book.shelf = 'none';
                     }
+                                    
+                    console.log(this.props.currentShelf)
+                    if (book.id === this.props.currentShelf.id) {
+                        book.shelf = this.props.currentShelf.shelf;
+                    }
+
                     if (book.imageLinks === undefined) {
                         book.imageLinks = '';
                     }
+
+                    this.props.currentShelf.forEach(function (idCurrentBook) {
+                        console.log(idCurrentBook);
+                        if (book.id === idCurrentBook.id) {
+                            shelf = book.shelf = idCurrentBook.shelf;
+                        }
+                    });
+
                     return {
                         id: book.id,
                         shelf: shelf,

@@ -1,21 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 
-class AddBook extends React.Component {
-    render() {
-        return (
-            <button>
-                <div >
-                    <Link
-                        className="open-search"
-                        to='/search'
-                    >
-                        AddBook</Link>
-                </div>
-            </button>
-        );
-    }
+
+const AddBook = props => {
+
+    return (
+        <div className="open-search">
+            <Link
+                to="/search"
+            >
+                Add a book
+              </Link>
+        </div>
+    )
 }
 
 export default AddBook;
