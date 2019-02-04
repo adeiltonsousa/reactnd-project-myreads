@@ -10,7 +10,6 @@ import ListBook from './components/ListBook'
 class BooksApp extends Component {
   state = {
     books: [],
-    book: [],
   }
 
   updateBook = (book, shelf) => {
@@ -39,23 +38,18 @@ class BooksApp extends Component {
   render() {
 
     var shelfBookCurently = this.state.books.filter(el => {
-      if (el.shelf === "currentlyReading") {
-        return el
-      }
+      return el.shelf === "currentlyReading";
     })
 
     var shelfBookWaltToRead = this.state.books.filter(el => {
-      if (el.shelf === "wantToRead") {
-        return el
-      }
+      return el.shelf === "wantToRead";
     })
 
     var shelfBookRead = this.state.books.filter(el => {
-      if (el.shelf === "read") {
-        return el
-      }
+      return el.shelf === "read";
     })
 
+    var currentShelf = shelfBookCurently.concat(shelfBookWaltToRead, shelfBookRead);
 
     return (
       <div className="app">
@@ -73,10 +67,8 @@ class BooksApp extends Component {
             </div>
           )} />
 
-
-
           <Route
-            render={() => <SearchBooks updateBook={this.updateBook} />}
+            render={() => <SearchBooks updateBook={this.updateBook} currentShelf={currentShelf} />}
             path='/search'
           />
         </div>
