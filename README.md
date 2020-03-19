@@ -1,6 +1,6 @@
 # MyReads
 
-Nesta aplicação, a página principal exibe uma lista de "estantes" (ou seja, categorias), cada uma das quais contém uma série de livros. As três estantes são:
+Sistema de controle de livros, em forma de "Estante Virtual. As três estantes são:
 
 Currently Reading (lendo atualmente)
 
@@ -9,9 +9,8 @@ Want to Read (quer ler)
 Read (já leu)
 
 
-
-MyReads é um aplicativo resultado do primeiro projeto do Nanodegree React da @Udacity. (Link: https://www.udacity.com/course/react-nanodegree--nd019 )
-
+MyReads é um aplicativo resultado do primeiro projeto do Nanodegree React da @Udacity.
+(Link: https://www.udacity.com/course/react-nanodegree--nd019 )
 
 
 ### Instalação
